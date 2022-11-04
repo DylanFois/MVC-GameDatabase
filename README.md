@@ -1,5 +1,10 @@
 # MVC-GameDatabase
 
+## Description
+A web app designed to host a database of games, currently has game name and description, but more will be added. Also uses login and registration to ensure only authorised users can add, edit or delete games.
+
+Uses MVC design pattern with ASP.NET Core
+
 ## File Structure
 ```bash
 # [Main Directory](./Game Database App/Game Database App)
