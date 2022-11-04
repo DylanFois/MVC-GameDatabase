@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Game_Database_App.Data;
 using Game_Database_App.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Game_Database_App.Controllers
 {
@@ -23,6 +24,18 @@ namespace Game_Database_App.Controllers
         public async Task<IActionResult> Index()
         {
               return View(await _context.Game.ToListAsync());
+        }
+
+        // GET: Games/Search
+        public async Task<IActionResult> Search()
+        {
+            return View();
+        }
+
+        // POST: Games/Search/SearchResult
+        public async Task<IActionResult> SearchResult(String SearchTerm)
+        {
+            return View("Index", await _context.Game.Where(j => j.GameName.Contains(SearchTerm)).ToListAsync());
         }
 
         // GET: Games/Details/5
@@ -44,6 +57,7 @@ namespace Game_Database_App.Controllers
         }
 
         // GET: Games/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -117,6 +131,7 @@ namespace Game_Database_App.Controllers
         }
 
         // GET: Games/Delete/5
+        [Authorize]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Game == null)
